@@ -2,6 +2,7 @@ import Client from "./client";
 import {ClientEvent} from "./gateway/client-events";
 import {Message} from "./core/message";
 
+// TODO: This is just for testing; not an actual bot
 if (!process.env.token) {
     throw new Error("Token is not set");
 }
