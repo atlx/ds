@@ -1,4 +1,3 @@
-import ClientManager from "../client-manager";
 import Client from "../client";
 import axios, {AxiosResponse} from "axios";
 import {Gateway} from "../http/http";
@@ -14,6 +13,7 @@ export default class ClientActions {
     public async createMessage(content: string, channel: Snowflake): Promise<void> {
         const response: AxiosResponse = await axios(`${Gateway.api}/channels/${channel}/messages`, {
             method: "POST",
+
             headers: {
                 authorization: `Bot ${this.client.token}`
             },

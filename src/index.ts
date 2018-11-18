@@ -1,6 +1,6 @@
 import Client from "./client";
 import {ClientEvent} from "./gateway/client-events";
-import {Message} from "./core/message";
+import {IMsg} from "./core/message";
 
 // TODO: This is just for testing; not an actual bot
 if (!process.env.token) {
@@ -9,7 +9,7 @@ if (!process.env.token) {
 
 const client: Client = new Client(process.env.token);
 
-client.on(ClientEvent.MessageCreate, async (message: Message) => {
+client.on(ClientEvent.MessageCreate, async (message: IMsg) => {
     if (message.content === "!ping") {
         await client.manager.actions.createMessage("Pong!", message.channel_id);
     }

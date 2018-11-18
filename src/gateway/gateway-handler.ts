@@ -4,7 +4,7 @@ import {OpCode} from "./op-codes";
 import ClientManager, {GatewayBotInformation} from "../client-manager";
 import Client, {ClientPresenceStatus} from "../client";
 import {ClientEvent} from "./client-events";
-import {Message} from "../core/message";
+import {IMsg} from "../core/message";
 
 export default class GatewayHandler {
     private readonly client: Client;
@@ -71,7 +71,7 @@ export default class GatewayHandler {
         } as ClientIdentifyMessage);
     }
 
-    public message(message: Message): void {
+    public message(message: IMsg): void {
         this.client.emit(ClientEvent.MessageCreate, message);
     }
 }

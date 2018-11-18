@@ -18,7 +18,7 @@ export default class Client extends EventEmitter {
     }
 }
 
-export type ClientPresenceGame = {
+export type IClientPresenceGame = {
     readonly name: string;
     readonly type: number;
 }
@@ -27,8 +27,8 @@ export enum ClientPresenceStatus {
     DoNotDisturb = "dnd"
 }
 
-export type ClientPresence = {
-    readonly game: ClientPresenceGame;
+export type IClientPresence = {
+    readonly game: IClientPresenceGame;
     readonly status: ClientPresenceStatus;
     readonly since: number;
     readonly afk: boolean;
