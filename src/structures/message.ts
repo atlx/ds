@@ -1,5 +1,5 @@
 import Client from "../client";
-import {IGuildChannel} from "./channel";
+import {IGuildChannel, TextChannel} from "./channel";
 
 // TODO: type, mentions, mention_roles, etc. enum/types
 export type IMsg = {
@@ -57,8 +57,12 @@ export class Msg {
         this.guildId = raw.guild_id;
     }
 
-    public get channel(): IGuildChannel {
-        return this.client.channels.get(this.channelId) as IGuildChannel;
+    public get channel(): TextChannel {
+        return this.client.channels.get(this.channelId) as any;
+    }
+
+    public reply(message: string): Promise<Msg | null> {
+        return this.channel.send(message.toString());
     }
 }
 

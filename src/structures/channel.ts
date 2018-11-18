@@ -1,4 +1,6 @@
-import {Snowflake, IUser} from "./message";
+import {Snowflake, IUser, Msg} from "./message";
+import Client from "../client";
+import DiscordSpecial from "../utils/special";
 
 export enum ChannelType {
     Text,
@@ -56,18 +58,23 @@ export interface ICategoryChannel extends IGuildChannel {
 }
 
 export class TextChannel {
-    readonly guildId: Snowflake;
-    readonly position: number;
-    readonly permissionOverwrites: IPermissionOverwrite[];
-    readonly name: string;
-    readonly parentId?: Snowflake;
-    readonly topic?: string;
-    readonly nsfw: boolean;
-    readonly lastMessageId?: Snowflake;
-    readonly lastPinTimestamp: number;
-    readonly rateLimitPerUser?: number;
+    public readonly id: Snowflake;
+    public readonly guildId: Snowflake;
+    public readonly position: number;
+    public readonly permissionOverwrites: IPermissionOverwrite[];
+    public readonly name: string;
+    public readonly parentId?: Snowflake;
+    public readonly topic?: string;
+    public readonly nsfw: boolean;
+    public readonly lastMessageId?: Snowflake;
+    public readonly lastPinTimestamp: number;
+    public readonly rateLimitPerUser?: number;
 
-    public constructor(raw: ITextChannel) {
+    private readonly client: Client;
+
+    public constructor(client: Client, raw: ITextChannel) {
+        this.client = client;
+        this.id = raw.id;
         this.guildId = raw.guild_id;
         this.position = raw.position;
         this.permissionOverwrites = raw.permission_overwrites;
@@ -78,5 +85,9 @@ export class TextChannel {
         this.lastMessageId = raw.last_message_id;
         this.lastPinTimestamp = raw.last_pin_timestamp;
         this.rateLimitPerUser = raw.rate_limit_per_user;
+    }
+
+    public send(content: string): Promise<Msg | null> {
+        return this.client.manager.actions.createMessage(content, this.id);
     }
 }

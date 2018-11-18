@@ -14,7 +14,7 @@ client.on(ClientEvent.MessageCreate, async (message: IMsg) => {
         const msg: Msg | null = await client.manager.actions.createMessage("Pong!", message.channel_id);
 
         if (msg) {
-            console.log("channel id", msg.channel);
+            msg.channel.send("hello pong world!");
         }
     }
 });

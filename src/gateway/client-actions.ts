@@ -53,6 +53,6 @@ export default class ClientActions {
         });
         
         // TODO: Use GenericChannel class instead? (might remove properties)
-        return (response.data ? new TextChannel(response.data) : null) as ResponseType | null;
+        return (response.data ? new TextChannel(this.client, response.data) : null) as ResponseType | null;
     }
 }
