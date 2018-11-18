@@ -1,6 +1,6 @@
 import Client from "./client";
 import {ClientEvent} from "./gateway/client-events";
-import {IMsg} from "./core/message";
+import {IMsg} from "./structures/message";
 
 // TODO: This is just for testing; not an actual bot
 if (!process.env.token) {

@@ -4,7 +4,7 @@ import {OpCode} from "./op-codes";
 import ClientManager, {GatewayBotInformation} from "../client-manager";
 import Client, {ClientPresenceStatus} from "../client";
 import {ClientEvent} from "./client-events";
-import {IMsg} from "../core/message";
+import {IMsg} from "../structures/message";
 
 export default class GatewayHandler {
     private readonly client: Client;

@@ -1,4 +1,4 @@
-import {Snowflake} from "../core/message";
+import {Snowflake} from "../structures/message";
 
 export abstract class Gateway {
     public static version: number = 7;

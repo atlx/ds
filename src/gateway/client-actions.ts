@@ -1,7 +1,7 @@
 import Client from "../client";
 import axios, {AxiosResponse} from "axios";
 import {Gateway} from "../http/http";
-import {Snowflake} from "../core/message";
+import {Snowflake} from "../structures/message";
 
 export default class ClientActions {
     private readonly client: Client;
