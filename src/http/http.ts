@@ -11,6 +11,10 @@ export abstract class ApiEndpoints {
     public static botGateway(): string {
         return `${Gateway.api}/gateway/bot`;
     }
+
+    public static getChannel(channelId: Snowflake): string {
+        return `${Gateway.api}/channels/${channelId}`;
+    }
 }
 
 export enum ImageFormat {

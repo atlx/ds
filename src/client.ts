@@ -1,14 +1,21 @@
 import ClientManager from "./client-manager";
 import {EventEmitter} from "events";
+import {Collection} from "./utils/collection";
+import {Snowflake, IMsg} from "./structures/message";
+import {IGenericChannel} from "./structures/channel";
 
 export default class Client extends EventEmitter {
     public readonly manager: ClientManager;
     public readonly token: string;
+    public readonly channels: Collection<Snowflake, IGenericChannel>;
+    public readonly messages: Collection<Snowflake, IMsg>;
 
     public constructor(token: string) {
         super();
         
         this.token = token;
+        this.channels = new Collection();
+        this.messages = new Collection();
         this.manager = new ClientManager(this);
     }
 
