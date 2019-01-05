@@ -1,7 +1,7 @@
 import Client from "../client";
 import axios, {AxiosResponse} from "axios";
 import {Gateway, ApiEndpoints, CdnEndpoints} from "../http/http";
-import {Snowflake, Msg, IMsg} from "../structures/message";
+import {Snowflake, Message, IMessage} from "../structures/message";
 import {IGenericChannel, TextChannel} from "../structures/channel";
 
 export default class ClientActions {
@@ -11,7 +11,7 @@ export default class ClientActions {
         this.client = client;
     }
 
-    public async createMessage(content: string, channel: Snowflake): Promise<Msg | null> {
+    public async createMessage(content: string, channel: Snowflake): Promise<Message | null> {
         const response: AxiosResponse = await axios(`${Gateway.api}/channels/${channel}/messages`, {
             method: "POST",
 
@@ -25,7 +25,7 @@ export default class ClientActions {
         });
 
         if (response.data) {
-            const raw: IMsg = response.data;
+            const raw: IMessage = response.data;
 
             if (!this.client.channels.has(raw.channel_id)) {
                 // TODO: Not nescerarliy text-channel
@@ -40,7 +40,7 @@ export default class ClientActions {
             }
         }
         
-        return response.data ? new Msg(this.client, response.data) : null;
+        return response.data ? new Message(this.client, response.data) : null;
     }
 
     public async fetchChannel<ResponseType = IGenericChannel>(channelId: Snowflake): Promise<ResponseType | null> {

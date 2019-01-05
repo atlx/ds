@@ -1,10 +1,10 @@
 import {Snowflake} from "../structures/message";
 
 export abstract class Gateway {
-    public static version: number = 7;
-    public static cdn: string = "https://cdn.discordapp.com";
-    public static api: string = "https://discordapp.com/api";
-    public static invite: string = "https://discord.gg";
+    public static readonly version: number = 7;
+    public static readonly cdn: string = "https://cdn.discordapp.com";
+    public static readonly api: string = "https://discordapp.com/api";
+    public static readonly invite: string = "https://discord.gg";
 }
 
 export abstract class ApiEndpoints {

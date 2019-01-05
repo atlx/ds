@@ -1,6 +1,5 @@
-import {Snowflake, IUser, Msg} from "./message";
+import {Snowflake, IUser, Message} from "./message";
 import Client from "../client";
-import DiscordSpecial from "../utils/special";
 
 export enum ChannelType {
     Text,
@@ -55,6 +54,7 @@ export type IDMChannel = {
 }
 
 export interface ICategoryChannel extends IGuildChannel {
+    //
 }
 
 export class TextChannel {
@@ -87,7 +87,7 @@ export class TextChannel {
         this.rateLimitPerUser = raw.rate_limit_per_user;
     }
 
-    public send(content: string): Promise<Msg | null> {
+    public send(content: string): Promise<Message | null> {
         return this.client.manager.actions.createMessage(content, this.id);
     }
 }

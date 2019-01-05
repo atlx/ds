@@ -1,4 +1,4 @@
-import {OpCode} from "./op-codes";
+import {OpCode} from "./op-code";
 
 export type GatewayHelloMessage = {
     readonly heartbeat_interval: number;

@@ -3,7 +3,7 @@ import WebSocket from "ws";
 import {EventEmitter} from "events";
 import GatewayHandler from "./gateway/gateway-handler";
 import {GatewayMessage, generateMessage} from "./gateway/gateway-messages";
-import {OpCode} from "./gateway/op-codes";
+import {OpCode} from "./gateway/op-code";
 import axios, {AxiosResponse} from "axios";
 import {ApiEndpoints, Gateway} from "./http/http";
 import ClientActions from "./gateway/client-actions";

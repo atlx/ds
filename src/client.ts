@@ -1,14 +1,14 @@
 import ClientManager from "./client-manager";
 import {EventEmitter} from "events";
 import {Collection} from "./utils/collection";
-import {Snowflake, IMsg} from "./structures/message";
+import {Snowflake, IMessage} from "./structures/message";
 import {IGenericChannel} from "./structures/channel";
 
 export default class Client extends EventEmitter {
     public readonly manager: ClientManager;
     public readonly token: string;
     public readonly channels: Collection<Snowflake, IGenericChannel>;
-    public readonly messages: Collection<Snowflake, IMsg>;
+    public readonly messages: Collection<Snowflake, IMessage>;
 
     public constructor(token: string) {
         super();
@@ -30,13 +30,17 @@ export type IClientPresenceGame = {
     readonly type: number;
 }
 
-export enum ClientPresenceStatus {
-    DoNotDisturb = "dnd"
+export enum PresenceStatus {
+    DoNotDisturb = "dnd",
+    Online = "online",
+    Idle = "idle",
+    Invisible = "invisible",
+    Offline = "offline"
 }
 
 export type IClientPresence = {
     readonly game: IClientPresenceGame;
-    readonly status: ClientPresenceStatus;
+    readonly status: PresenceStatus;
     readonly since: number;
     readonly afk: boolean;
 }

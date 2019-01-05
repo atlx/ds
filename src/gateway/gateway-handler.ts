@@ -1,10 +1,10 @@
 import {GatewayHelloMessage} from "./gateway-messages";
 import {ClientIdentifyMessage} from "./client-messages";
-import {OpCode} from "./op-codes";
+import {OpCode} from "./op-code";
 import ClientManager, {GatewayBotInformation} from "../client-manager";
-import Client, {ClientPresenceStatus} from "../client";
+import Client, {PresenceStatus} from "../client";
 import {ClientEvent} from "./client-events";
-import {IMsg} from "../structures/message";
+import {IMessage} from "../structures/message";
 
 export default class GatewayHandler {
     private readonly client: Client;
@@ -28,14 +28,15 @@ export default class GatewayHandler {
         this.manager.on(opCode.toString(), handler.bind(this));
     }
 
-    public hello(data: any): void {
+    public hello(data: GatewayHelloMessage): void {
         const gatewayBotInfo: GatewayBotInformation | null = this.manager.getGatewayBotInfo();
 
         // TODO: Organize/optimize
         if (gatewayBotInfo === null) {
-            throw new Error("Gate");
+            throw new Error("Gateway bot information is null");
         }
 
+        // TODO: Debugging
         console.log(`WS Handling hello message with data`, data);
 
         const message: GatewayHelloMessage = data;
@@ -64,14 +65,18 @@ export default class GatewayHandler {
                     type: 0
                 },
 
-                status: ClientPresenceStatus.DoNotDisturb,
+                // Initially online
+                status: PresenceStatus.Online,
+
+                // TODO
                 since: 91879201,
+
                 afk: false
             }
         } as ClientIdentifyMessage);
     }
 
-    public message(message: IMsg): void {
+    public message(message: IMessage): void {
         this.client.emit(ClientEvent.MessageCreate, message);
     }
 }

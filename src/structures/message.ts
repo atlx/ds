@@ -1,26 +1,93 @@
 import Client from "../client";
-import {IGuildChannel, TextChannel} from "./channel";
+import {TextChannel} from "./channel";
+
+export type Snowflake = string;
+
+export enum MessageType {
+    Default,
+    RecipientAdd,
+    RecipientRemove,
+    Call,
+    ChannelNameChange,
+    ChannelIconChange,
+    ChannelPinnedMessage,
+    GuildMemberJoin
+}
 
 // TODO: type, mentions, mention_roles, etc. enum/types
-export type IMsg = {
+export interface IMessage {
+    /**
+     * Unique id of the message
+     */
     readonly id: Snowflake;
-    readonly type: number;
+
+    /**
+     * The type of message
+     */
+    readonly type: MessageType;
+
+    /**
+     * When this message was sent
+     */
     readonly timestamp: string;
+
+    /**
+     * Whether this message is pinned
+     */
     readonly pinned: boolean;
+
+    /**
+     * Used for validating a message was sent
+     */
     readonly nonce: string;
+
+    /**
+     * Users specifically mentioned in the message
+     */
     readonly mentions: any[];
+
+    /**
+     * Roles specifically mentioned in this message
+     */
     readonly mention_roles: any[];
-    readonly member: IMember;
+
+    /**
+     * Any embedded content
+     */
     readonly embeds: any[];
-    readonly edited_timestamp: null;
+
+    /**
+     * When this message was edited (or null if never)
+     */
+    readonly edited_timestamp: string | null;
+    
+    /**
+     * Contents of the message
+     */
     readonly content: string;
+
+    /**
+     * Id of the channel the message was sent in
+     */
     readonly channel_id: Snowflake;
+
+    /**
+     * The author of this message (not guaranteed to be a valid user)
+     */
     readonly author: IUser;
+
+    /**
+     * Any attached files
+     */
     readonly attachments: any[];
+
+    /**
+     * Id of the guild the message was sent in
+     */
     readonly guild_id?: Snowflake;
 }
 
-export class Msg {
+export class Message {
     public readonly id: Snowflake;
     public readonly type: number;
     public readonly timestamp: string;
@@ -39,7 +106,7 @@ export class Msg {
 
     private readonly client: Client;
 
-    public constructor(client: Client, raw: IMsg) {
+    public constructor(client: Client, raw: IMessage) {
         this.client = client;
         this.id = raw.id;
         this.type = raw.type;
@@ -48,7 +115,9 @@ export class Msg {
         this.nonce = raw.nonce;
         this.mentions = raw.mentions;
         this.mentionedRoles = raw.mention_roles;
-        this.member = raw.member;
+
+        // TODO
+        //this.member = raw.member;
         this.embeds = raw.embeds;
         this.content = raw.content;
         this.channelId = raw.channel_id;
@@ -61,24 +130,22 @@ export class Msg {
         return this.client.channels.get(this.channelId) as any;
     }
 
-    public reply(message: string): Promise<Msg | null> {
+    public reply(message: string): Promise<Message | null> {
         return this.channel.send(message.toString());
     }
 }
 
-export type IUser = {
+export interface IUser {
     readonly username: string;
     readonly discriminator: string;
     readonly id: Snowflake;
     readonly avatar: string;
 }
 
-export type IMember = {
+export interface IMember {
     readonly roles: Snowflake[];
     readonly nick: string | null;
     readonly mute: boolean;
     readonly joined_at: string;
     readonly deaf: boolean;
 }
-
-export type Snowflake = string;
