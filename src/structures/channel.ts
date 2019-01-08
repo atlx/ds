@@ -22,7 +22,7 @@ export interface IGuildChannel extends IGenericChannel {
     readonly parent_id?: Snowflake;
 }
 
-export type IPermissionOverwrite = {
+export interface IPermissionOverwrite {
     readonly id: Snowflake;
     readonly type: "role" | "member";
     readonly allow: number;
@@ -42,7 +42,7 @@ export interface IVoiceChannel extends IGuildChannel {
     readonly user_limit?: number;
 }
 
-export interface IGroupDMChannel extends IGenericChannel {
+export interface IGroupDmChannel extends IGenericChannel {
     readonly recipients?: IUser[];
     readonly icon?: string;
     readonly owner_id: Snowflake;

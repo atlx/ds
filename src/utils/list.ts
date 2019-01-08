@@ -1,5 +1,3 @@
-import {EventEmitter} from "events";
-
 /**
  * @extends EventEmitter
  */
