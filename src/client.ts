@@ -4,6 +4,9 @@ import {Collection} from "./utils/collection";
 import {Snowflake, IMessage} from "./structures/message";
 import {IGenericChannel} from "./structures/channel";
 
+/**
+ * @extends EventEmitter
+ */
 export default class Client extends EventEmitter {
     public readonly manager: ClientManager;
     public readonly token: string;
@@ -25,7 +28,7 @@ export default class Client extends EventEmitter {
     }
 }
 
-export type IClientPresenceGame = {
+export interface IPresenceGame {
     readonly name: string;
     readonly type: number;
 }
@@ -38,8 +41,8 @@ export enum PresenceStatus {
     Offline = "offline"
 }
 
-export type IClientPresence = {
-    readonly game: IClientPresenceGame;
+export interface IPresence {
+    readonly game: IPresenceGame;
     readonly status: PresenceStatus;
     readonly since: number;
     readonly afk: boolean;

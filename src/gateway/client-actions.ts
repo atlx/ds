@@ -1,6 +1,6 @@
 import Client from "../client";
 import axios, {AxiosResponse} from "axios";
-import {Gateway, ApiEndpoints, CdnEndpoints} from "../http/http";
+import {Gateway, ApiEndpoints} from "../http/http";
 import {Snowflake, Message, IMessage} from "../structures/message";
 import {IGenericChannel, TextChannel} from "../structures/channel";
 

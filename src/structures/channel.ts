@@ -49,7 +49,7 @@ export interface IGroupDMChannel extends IGenericChannel {
     readonly application_id?: Snowflake;
 }
 
-export type IDMChannel = {
+export interface IDmChannel {
     readonly recipients: IUser[]
 }
 

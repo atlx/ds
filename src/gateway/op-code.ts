@@ -1,4 +1,4 @@
-export enum OpCode {
+enum OpCode {
     Dispatch = 0,
     Heartbeat = 1,
     Identify = 2,
@@ -11,3 +11,5 @@ export enum OpCode {
     Hello = 10,
     HeartbeatAck = 11
 }
+
+export default OpCode;

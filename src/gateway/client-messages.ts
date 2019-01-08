@@ -1,4 +1,4 @@
-import {IClientPresence} from "../client";
+import {IPresence} from "../client";
 
 export type ClientHeartbeatMessage = {
     //
@@ -16,5 +16,5 @@ export type ClientIdentifyMessage = {
     readonly compress: boolean;
     readonly large_threshold: number;
     readonly shard: number[];
-    readonly presence: IClientPresence;
+    readonly presence: IPresence;
 }

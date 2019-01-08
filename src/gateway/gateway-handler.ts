@@ -1,6 +1,6 @@
 import {GatewayHelloMessage} from "./gateway-messages";
 import {ClientIdentifyMessage} from "./client-messages";
-import {OpCode} from "./op-code";
+import OpCode from "./op-code";
 import ClientManager, {GatewayBotInformation} from "../client-manager";
 import Client, {PresenceStatus} from "../client";
 import {ClientEvent} from "./client-events";
