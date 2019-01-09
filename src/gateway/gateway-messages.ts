@@ -1,6 +1,6 @@
 import OpCode from "./op-code";
 
-export type GatewayHelloMessage = {
+export type GHelloMessage = {
     readonly heartbeat_interval: number;
 }
 
