@@ -4,8 +4,13 @@ import {Gateway, ApiEndpoints} from "../http/http";
 import {Snowflake, Message, IMessage} from "../structures/message";
 import {IGenericChannel, TextChannel} from "../structures/channel";
 
-export default class ClientActions {
-    private readonly client: Client;
+export interface IClientActions {
+    createMessage(content: string, channel: Snowflake): Promise<Message | null>;
+    fetchChannel<T extends IGenericChannel | TextChannel>(channelId: Snowflake): Promise<T | null>;
+}
+
+export default class ClientActions implements IClientActions {
+    protected readonly client: Client;
 
     public constructor(client: Client) {
         this.client = client;
@@ -43,7 +48,7 @@ export default class ClientActions {
         return response.data ? new Message(this.client, response.data) : null;
     }
 
-    public async fetchChannel<ResponseType = IGenericChannel>(channelId: Snowflake): Promise<ResponseType | null> {
+    public async fetchChannel<T extends IGenericChannel | TextChannel = IGenericChannel>(channelId: Snowflake): Promise<T | null> {
         const response: AxiosResponse = await axios(ApiEndpoints.getChannel(channelId), {
             method: "GET",
 
@@ -53,6 +58,6 @@ export default class ClientActions {
         });
         
         // TODO: Use GenericChannel class instead? (might remove properties)
-        return (response.data ? new TextChannel(this.client, response.data) : null) as ResponseType | null;
+        return (response.data ? new TextChannel(this.client, response.data) : null) as T | null;
     }
 }

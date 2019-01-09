@@ -6,12 +6,18 @@ import Client, {PresenceStatus} from "../client";
 import {ClientEvent} from "./client-events";
 import {IMessage} from "../structures/message";
 
-export default class GatewayHandler {
-    private readonly client: Client;
-    private readonly manager: ClientManager;
+export interface IGatewayHandler {
+    on(opCode: number | string, handler: any): this;
+    hello(data: GHelloMessage): this;
+    message(message: IMessage): this;
+}
+
+export default class GatewayHandler implements IGatewayHandler {
+    protected readonly client: Client;
+    protected readonly manager: ClientManager;
     
     // TODO
-    private lastHeartbeat: number | null = null;
+    protected lastHeartbeat: number | null = null;
 
     public constructor(client: Client, manager: ClientManager) {
         this.client = client;
@@ -24,11 +30,13 @@ export default class GatewayHandler {
         this.on(ClientEvent.MessageCreate, this.message);
     }
 
-    private on(opCode: number | string, handler: any): void {
+    public on(opCode: number | string, handler: any): this {
         this.manager.on(opCode.toString(), handler.bind(this));
+
+        return this;
     }
 
-    public hello(data: GHelloMessage): void {
+    public hello(data: GHelloMessage): this {
         const gatewayBotInfo: GatewayBotInformation | null = this.manager.getGatewayBotInfo();
 
         // TODO: Organize/optimize
@@ -74,9 +82,13 @@ export default class GatewayHandler {
                 afk: false
             }
         } as CIdentifyMessage);
+
+        return this;
     }
 
-    public message(message: IMessage): void {
+    public message(message: IMessage): this {
         this.client.emit(ClientEvent.MessageCreate, message);
+
+        return this;
     }
 }
