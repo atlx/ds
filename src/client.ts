@@ -3,6 +3,7 @@ import {EventEmitter} from "events";
 import {Collection} from "./utils/collection";
 import {Snowflake, IMessage} from "./structures/message";
 import {IGenericChannel} from "./structures/channel";
+import User from "./structures/user";
 
 export interface IClient extends EventEmitter {
     connect(): Promise<this>;
@@ -21,11 +22,13 @@ export default class Client extends EventEmitter implements IClient {
     public readonly token: string;
     public readonly channels: Collection<Snowflake, IGenericChannel>;
     public readonly messages: Collection<Snowflake, IMessage>;
+    public readonly users: Collection<Snowflake, User>;
 
     public constructor(token: string) {
         super();
         
         this.token = token;
+        this.users = new Collection();
         this.channels = new Collection();
         this.messages = new Collection();
         this.manager = new ClientManager(this);

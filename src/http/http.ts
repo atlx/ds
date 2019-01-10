@@ -1,4 +1,23 @@
 import {Snowflake} from "../structures/message";
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+
+export default abstract class HttpClient {
+    public static async fetch<T = any>(url: string, token?: string): Promise<T | null> {
+        const config: AxiosRequestConfig = {
+            method: "GET"
+        };
+
+        if (token !== undefined) {
+            config.headers = {
+                authorization: `Bot ${token}`
+            };
+        }
+
+        const response: AxiosResponse = await axios(url, config);
+
+        return response.status === 200 && response.data ? response.data : null;
+    }
+}
 
 export abstract class Gateway {
     public static readonly version: number = 7;
@@ -12,8 +31,12 @@ export abstract class ApiEndpoints {
         return `${Gateway.api}/gateway/bot`;
     }
 
-    public static getChannel(channelId: Snowflake): string {
+    public static channel(channelId: Snowflake): string {
         return `${Gateway.api}/channels/${channelId}`;
+    }
+
+    public static user(userId: Snowflake): string {
+        return `${Gateway.api}/users/${userId}`;
     }
 }
 

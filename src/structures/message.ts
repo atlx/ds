@@ -1,5 +1,6 @@
 import Client from "../client";
 import {TextChannel} from "./channel";
+import {IUser} from "./user";
 
 export type Snowflake = string;
 
@@ -133,13 +134,6 @@ export class Message {
     public reply(message: string): Promise<Message | null> {
         return this.channel.send(message.toString());
     }
-}
-
-export interface IUser {
-    readonly username: string;
-    readonly discriminator: string;
-    readonly id: Snowflake;
-    readonly avatar: string;
 }
 
 export interface IMember {

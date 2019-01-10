@@ -1,8 +1,9 @@
 import Client from "../client";
 import axios, {AxiosResponse} from "axios";
-import {Gateway, ApiEndpoints} from "../http/http";
+import HttpClient, {Gateway, ApiEndpoints} from "../http/http";
 import {Snowflake, Message, IMessage} from "../structures/message";
 import {IGenericChannel, TextChannel} from "../structures/channel";
+import User, {IUser} from "../structures/user";
 
 export interface IClientActions {
     createMessage(content: string, channel: Snowflake): Promise<Message | null>;
@@ -44,20 +45,20 @@ export default class ClientActions implements IClientActions {
                 }
             }
         }
-        
+
         return response.data ? new Message(this.client, response.data) : null;
     }
 
     public async fetchChannel<T extends IGenericChannel | TextChannel = IGenericChannel>(channelId: Snowflake): Promise<T | null> {
-        const response: AxiosResponse = await axios(ApiEndpoints.getChannel(channelId), {
-            method: "GET",
+        const response: T | null = await HttpClient.fetch(ApiEndpoints.channel(channelId), this.client.token);
 
-            headers: {
-                authorization: `Bot ${this.client.token}`
-            },
-        });
-        
         // TODO: Use GenericChannel class instead? (might remove properties)
-        return (response.data ? new TextChannel(this.client, response.data) : null) as T | null;
+        return (response !== null ? new TextChannel(this.client, response as any) : null) as T | null;
+    }
+
+    public async fetchUser(userId: Snowflake): Promise<User | null> {
+        const response: IUser | null = await HttpClient.fetch(ApiEndpoints.user(userId));
+
+        return response !== null ? new User(this.client, response) : null;
     }
 }
