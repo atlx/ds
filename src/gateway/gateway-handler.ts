@@ -1,5 +1,5 @@
-import {GHelloMessage} from "./gateway-messages";
-import {CIdentifyMessage} from "./client-messages";
+import {G_Hello} from "./gateway-messages";
+import {C_Identify} from "./client-messages";
 import OpCode from "./op-code";
 import ClientManager, {GatewayBotInformation} from "../client-manager";
 import Client, {PresenceStatus} from "../client";
@@ -8,7 +8,7 @@ import {IMessage} from "../structures/message";
 
 export interface IGatewayHandler {
     on(opCode: number | string, handler: any): this;
-    hello(data: GHelloMessage): this;
+    hello(data: G_Hello): this;
     message(message: IMessage): this;
 }
 
@@ -36,7 +36,7 @@ export default class GatewayHandler implements IGatewayHandler {
         return this;
     }
 
-    public hello(data: GHelloMessage): this {
+    public hello(data: G_Hello): this {
         const gatewayBotInfo: GatewayBotInformation | null = this.manager.getGatewayBotInfo();
 
         // TODO: Organize/optimize
@@ -47,7 +47,7 @@ export default class GatewayHandler implements IGatewayHandler {
         // TODO: Debugging
         console.log(`WS Handling hello message with data`, data);
 
-        const message: GHelloMessage = data;
+        const message: G_Hello = data;
 
         // TODO: Use client setInterval() instead
         setInterval(() => {
@@ -81,7 +81,7 @@ export default class GatewayHandler implements IGatewayHandler {
 
                 afk: false
             }
-        } as CIdentifyMessage);
+        } as C_Identify);
 
         return this;
     }

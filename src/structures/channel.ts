@@ -70,21 +70,21 @@ export class TextChannel {
     public readonly lastPinTimestamp: number;
     public readonly rateLimitPerUser?: number;
 
-    private readonly client: Client;
+    protected readonly client: Client;
 
-    public constructor(client: Client, raw: ITextChannel) {
+    public constructor(client: Client, struct: ITextChannel) {
         this.client = client;
-        this.id = raw.id;
-        this.guildId = raw.guild_id;
-        this.position = raw.position;
-        this.permissionOverwrites = raw.permission_overwrites;
-        this.name = raw.name;
-        this.parentId = raw.parent_id;
-        this.topic = raw.topic;
-        this.nsfw = raw.nsfw;
-        this.lastMessageId = raw.last_message_id;
-        this.lastPinTimestamp = raw.last_pin_timestamp;
-        this.rateLimitPerUser = raw.rate_limit_per_user;
+        this.id = struct.id;
+        this.guildId = struct.guild_id;
+        this.position = struct.position;
+        this.permissionOverwrites = struct.permission_overwrites;
+        this.name = struct.name;
+        this.parentId = struct.parent_id;
+        this.topic = struct.topic;
+        this.nsfw = struct.nsfw;
+        this.lastMessageId = struct.last_message_id;
+        this.lastPinTimestamp = struct.last_pin_timestamp;
+        this.rateLimitPerUser = struct.rate_limit_per_user;
     }
 
     public send(content: string): Promise<Message | null> {

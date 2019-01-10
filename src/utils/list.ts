@@ -1,15 +1,15 @@
 /**
  * @extends EventEmitter
  */
-export default class List<DataType> {
-    private readonly items: DataType[];
+export default class List<T> {
+    private readonly items: T[];
 
     /**
-     * @param {DataType[]} [items=[]]
+     * @param {T[]} [items=[]]
      */
-    public constructor(items: DataType[] = []) {
+    public constructor(items: T[] = []) {
         /**
-         * @type {DataType[]}
+         * @type {T[]}
          * @private
          */
         this.items = items;
@@ -18,9 +18,9 @@ export default class List<DataType> {
     /**
      * Get an item in this collection by its index
      * @param {number} index
-     * @return {DataType | null}
+     * @return {T | null}
      */
-    public at(index: number): DataType | null {
+    public at(index: number): T | null {
         return this.items[index] || null;
     }
 
@@ -41,10 +41,10 @@ export default class List<DataType> {
 
     /**
      * Add an item to this collection
-     * @param {DataType} item
+     * @param {T} item
      * @return {this}
      */
-    public add(item: DataType): this {
+    public add(item: T): this {
         this.items.push(item);
 
         return this;
@@ -52,10 +52,10 @@ export default class List<DataType> {
 
     /**
      * Add an item to this collection only if it doesn't already exist
-     * @param {DataType} item
+     * @param {T} item
      * @return {boolean} Whether the item was added
      */
-    public addUnique(item: DataType): boolean {
+    public addUnique(item: T): boolean {
         if (!this.contains(item)) {
             this.add(item);
 
@@ -67,10 +67,10 @@ export default class List<DataType> {
 
     /**
      * Determine whether this collection contains an item
-     * @param {DataType} item
+     * @param {T} item
      * @return {boolean}
      */
-    public contains(item: DataType): boolean {
+    public contains(item: T): boolean {
         for (let i: number = 0; i < this.items.length; i++) {
             if (this.items[i] === item) {
                 return true;

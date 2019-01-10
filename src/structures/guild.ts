@@ -1,4 +1,5 @@
 import {Snowflake} from "./message";
+import Client from "../client";
 
 export type Hash = string;
 
@@ -71,4 +72,29 @@ export interface IGuild {
      * Voice region id for the guild
      */
     readonly region: string;
+}
+
+export default class Guild {
+    public readonly id: Snowflake;
+    public readonly name: string;
+    public readonly icon?: Hash;
+    public readonly splash?: Hash;
+    public readonly owner?: boolean;
+    public readonly ownerId?: Snowflake;
+    public readonly permissions?: number;
+    public readonly region: string;
+
+    protected client: Client;
+
+    public constructor(client: Client, struct: IGuild) {
+        this.client = client;
+        this.id = struct.id;
+        this.name = struct.name;
+        this.icon = struct.icon;
+        this.splash = struct.splash;
+        this.owner = struct.owner;
+        this.ownerId = struct.owner_id;
+        this.permissions = struct.permissions;
+        this.region = struct.region;
+    }
 }

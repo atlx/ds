@@ -1,18 +1,18 @@
 import {IPresence} from "../client";
 
-export type CHeartbeatMessage = {
+export type C_Heartbeat = {
     //
 }
 
-export type CIdentifyMessageProps = {
+export type C_IdentifyProps = {
     readonly $os: string;
     readonly $browser: string;
     readonly $device: string;
 }
 
-export type CIdentifyMessage = {
+export type C_Identify = {
     readonly token: string;
-    readonly properties: CIdentifyMessageProps;
+    readonly properties: C_IdentifyProps;
     readonly compress: boolean;
     readonly large_threshold: number;
     readonly shard: number[];
