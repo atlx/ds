@@ -29,7 +29,7 @@ const allowedImageFormats = [
     "gif"
 ];
 
-// TODO: Dummy data
+// TODO: Dummy data?
 const allowedImageSizes = [
     16,
     32,
