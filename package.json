@@ -1,10 +1,10 @@
 {
     "name": "ds",
     "version": "1.0.0",
-    "description": "Discord API Library",
-    "main": "dist/index.js",
+    "description": "Discord API wrapper library",
+    "main": "dist/Index.js",
     "scripts": {
-        "start": "npm run build && node dist/index.js",
+        "start": "npm run build && node dist/Index.js",
         "build": "tsc"
     },
     "author": "CloudRex <cloudrex@outlook.com>",
