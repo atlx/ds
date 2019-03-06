@@ -4,21 +4,12 @@
 export default class List<T> {
     private readonly items: T[];
 
-    /**
-     * @param {T[]} [items=[]]
-     */
     public constructor(items: T[] = []) {
-        /**
-         * @type {T[]}
-         * @private
-         */
         this.items = items;
     }
 
     /**
-     * Get an item in this collection by its index
-     * @param {number} index
-     * @return {T | null}
+     * Get an item in this collection by its index.
      */
     public at(index: number): T | null {
         return this.items[index] || null;
@@ -26,8 +17,7 @@ export default class List<T> {
 
     /**
      * Remove an item from this collection by its index
-     * @param {number} index
-     * @return {boolean} Whether the item was removed
+     * @return {boolean} Whether the item was removed.
      */
     public removeAt(index: number): boolean {
         if (this.items[index] !== null && this.items[index] !== undefined) {
@@ -40,9 +30,7 @@ export default class List<T> {
     }
 
     /**
-     * Add an item to this collection
-     * @param {T} item
-     * @return {this}
+     * Add an item to this collection.
      */
     public add(item: T): this {
         this.items.push(item);
@@ -51,9 +39,8 @@ export default class List<T> {
     }
 
     /**
-     * Add an item to this collection only if it doesn't already exist
-     * @param {T} item
-     * @return {boolean} Whether the item was added
+     * Add an item to this collection only if it doesn't already exist.
+     * @return {boolean} Whether the item was added.
      */
     public addUnique(item: T): boolean {
         if (!this.contains(item)) {
@@ -66,9 +53,7 @@ export default class List<T> {
     }
 
     /**
-     * Determine whether this collection contains an item
-     * @param {T} item
-     * @return {boolean}
+     * Determine whether this collection contains an item.
      */
     public contains(item: T): boolean {
         for (let i: number = 0; i < this.items.length; i++) {

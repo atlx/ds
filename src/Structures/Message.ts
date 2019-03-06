@@ -18,72 +18,72 @@ export enum MessageType {
 // TODO: type, mentions, mention_roles, etc. enum/types
 export interface IMessage {
     /**
-     * Unique id of the message
+     * Unique id of the message.
      */
     readonly id: Snowflake;
 
     /**
-     * The type of message
+     * The type of message.
      */
     readonly type: MessageType;
 
     /**
-     * When this message was sent
+     * The timestamp representing when this message was sent.
      */
     readonly timestamp: string;
 
     /**
-     * Whether this message is pinned
+     * Whether this message is pinned in it's corresponding channel.
      */
     readonly pinned: boolean;
 
     /**
-     * Used for validating a message was sent
+     * Used for validating a message was sent.
      */
     readonly nonce: string;
 
     /**
-     * Users specifically mentioned in the message
+     * Users specifically mentioned in the message.
      */
     readonly mentions: any[];
 
     /**
-     * Roles specifically mentioned in this message
+     * Roles specifically mentioned in this message.
      */
     readonly mention_roles: any[];
 
     /**
-     * Any embedded content
+     * Any embedded content.
      */
     readonly embeds: any[];
 
     /**
-     * When this message was edited (or null if never)
+     * When this message was edited (or null if never).
      */
     readonly edited_timestamp: string | null;
     
     /**
-     * Contents of the message
+     * Contents of the message.
      */
     readonly content: string;
 
     /**
-     * Id of the channel the message was sent in
+     * Id of the channel the message was sent in.
      */
     readonly channel_id: Snowflake;
 
     /**
-     * The author of this message (not guaranteed to be a valid user)
+     * The author of this message (not guaranteed to be a valid user).
      */
     readonly author: IUser;
 
     /**
-     * Any attached files
+     * Any attached files.
      */
     readonly attachments: any[];
 
     /**
-     * Id of the guild the message was sent in
+     * Id of the guild the message was sent in.
      */
     readonly guild_id?: Snowflake;
 }

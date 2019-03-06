@@ -5,7 +5,7 @@ export interface IInvite {
     readonly code: string;
     readonly guild?: IPartialGuild;
     
-    // TODO: Partial channel (see https://discordapp.com/developers/docs/resources/invite)
+    // TODO: Partial channel (see https://discordapp.com/developers/docs/resources/invite).
     readonly channel: any;
 
     readonly approximate_presence_count?: number;
@@ -28,7 +28,7 @@ export default class Invite {
         this.client = client;
         this.code = struct.code;
 
-        // TODO: IPartialGuild != PartialGuild
+        // TODO: IPartialGuild != PartialGuild.
         this.guild = struct.guild as any;
 
         this.channel = struct.channel;

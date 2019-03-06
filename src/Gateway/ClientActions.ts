@@ -1,9 +1,9 @@
 import Client from "../Client";
 import axios, {AxiosResponse} from "axios";
-import HttpClient, {Gateway, ApiEndpoints} from "../http/http";
-import {Snowflake, Message, IMessage} from "../structures/message";
-import {IGenericChannel, TextChannel} from "../structures/channel";
-import User, {IUser} from "../structures/user";
+import HttpClient, {Gateway, ApiEndpoints} from "../Http/Http";
+import {Snowflake, Message, IMessage} from "../Structures/Message";
+import {IGenericChannel, TextChannel} from "../Structures/Channel";
+import User, {IUser} from "../Structures/User";
 
 export interface IClientActions {
     createMessage(content: string, channel: Snowflake): Promise<Message | null>;

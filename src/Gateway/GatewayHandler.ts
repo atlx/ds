@@ -4,7 +4,7 @@ import OpCode from "./OpCode";
 import ClientManager, {GatewayBotInformation} from "../ClientManager";
 import Client, {PresenceStatus} from "../Client";
 import {ClientEvent} from "./ClientEvents";
-import {IMessage} from "../structures/message";
+import {IMessage} from "../Structures/Message";
 
 export interface IGatewayHandler {
     on(opCode: number | string, handler: any): this;

@@ -1,12 +1,12 @@
 import Client from "./Client";
 import WebSocket from "ws";
 import {EventEmitter} from "events";
-import GatewayHandler from "./gateway/gateway-handler";
-import {GatewayMessage, generateMessage} from "./gateway/gateway-messages";
-import OpCode from "./gateway/op-code";
+import GatewayHandler from "./Gateway/GatewayHandler";
+import {GatewayMessage, generateMessage} from "./Gateway/GatewayMessages";
+import OpCode from "./Gateway/OpCode";
 import axios, {AxiosResponse} from "axios";
-import {ApiEndpoints} from "./http/http";
-import ClientActions, {IClientActions} from "./gateway/client-actions";
+import {ApiEndpoints} from "./Http/Http";
+import ClientActions, {IClientActions} from "./Gateway/ClientActions";
 
 export type GatewayBotInformationSessionStartLimit = {
     readonly total: number;

@@ -1,4 +1,4 @@
-import {Snowflake} from "../structures/message";
+import {Snowflake} from "../Structures/Message";
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 
 export default abstract class HttpClient {

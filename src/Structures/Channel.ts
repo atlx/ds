@@ -1,5 +1,6 @@
-import {Snowflake, IUser, Message} from "./Message";
+import {Snowflake, Message} from "./Message";
 import Client from "../Client";
+import {IUser} from "./User";
 
 export enum ChannelType {
     Text,
