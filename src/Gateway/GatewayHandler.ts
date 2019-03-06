@@ -1,4 +1,4 @@
-import {G_Hello} from "./gateway-messages";
+import {G_Hello} from "./GatewayMessages";
 import {C_Identify} from "./ClientMessages";
 import OpCode from "./OpCode";
 import ClientManager, {GatewayBotInformation} from "../ClientManager";
