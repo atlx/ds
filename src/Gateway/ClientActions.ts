@@ -34,7 +34,7 @@ export default class ClientActions implements IClientActions {
             const raw: IMessage = response.data;
 
             if (!this.client.channels.has(raw.channel_id)) {
-                // TODO: Not nescerarliy text-channel
+                // TODO: Not nescerarliy text-channel.
                 const channel: TextChannel | null = await this.fetchChannel<TextChannel>(raw.channel_id);
 
                 if (channel !== null) {
@@ -52,7 +52,7 @@ export default class ClientActions implements IClientActions {
     public async fetchChannel<T extends IGenericChannel | TextChannel = IGenericChannel>(channelId: Snowflake): Promise<T | null> {
         const response: T | null = await HttpClient.fetch(ApiEndpoints.channel(channelId), this.client.token);
 
-        // TODO: Use GenericChannel class instead? (might remove properties)
+        // TODO: Use GenericChannel class instead? (might remove properties).
         return (response !== null ? new TextChannel(this.client, response as any) : null) as T | null;
     }
 

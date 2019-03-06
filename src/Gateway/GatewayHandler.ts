@@ -24,10 +24,10 @@ export default class GatewayHandler implements IGatewayHandler {
         this.client = client;
         this.manager = manager;
 
-        // OpCode handlers
+        // OpCode handlers.
         this.on(OpCode.Hello, this.hello);
 
-        // Client events handlers
+        // Client events handlers.
         this.on(ClientEvent.MessageCreate, this.message);
     }
 
@@ -50,12 +50,12 @@ export default class GatewayHandler implements IGatewayHandler {
 
         const message: G_Hello = data;
 
-        // TODO: Use client setInterval() instead
+        // TODO: Use client setInterval() instead.
         setInterval(() => {
             this.manager.send(OpCode.Heartbeat, {});
         }, message.heartbeat_interval);
 
-        // Identify
+        // Identify.
         this.manager.send(OpCode.Identify, {
             token: this.client.token,
             compress: true,
@@ -74,7 +74,7 @@ export default class GatewayHandler implements IGatewayHandler {
                     type: 0
                 },
 
-                // Initially online
+                // Initially online.
                 status: PresenceStatus.Online,
 
                 // TODO
