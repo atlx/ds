@@ -1,4 +1,4 @@
-import Client from "./client";
+import Client from "./Client";
 import WebSocket from "ws";
 import {EventEmitter} from "events";
 import GatewayHandler from "./gateway/gateway-handler";

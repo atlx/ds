@@ -1,4 +1,4 @@
-import Client from "./client";
+import Client from "./Client";
 import {ClientEvent} from "./gateway/client-events";
 import {IMessage, Message} from "./structures/message";
 

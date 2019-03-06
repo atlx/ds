@@ -1,5 +1,5 @@
-import PartialGuild, {IPartialGuild} from "./partial-guild";
-import Client from "../client";
+import PartialGuild, {IPartialGuild} from "./PartialGuild";
+import Client from "../Client";
 
 export interface IInvite {
     readonly code: string;

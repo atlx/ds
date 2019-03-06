@@ -1,4 +1,4 @@
-import {IPresence} from "../client";
+import {IPresence} from "../Client";
 
 export type C_Heartbeat = {
     //

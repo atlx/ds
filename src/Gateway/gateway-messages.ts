@@ -1,4 +1,4 @@
-import OpCode from "./op-code";
+import OpCode from "./OpCode";
 
 export type G_Hello = {
     readonly heartbeat_interval: number;

@@ -1,6 +1,6 @@
-import Client from "../client";
-import {TextChannel} from "./channel";
-import {IUser} from "./user";
+import Client from "../Client";
+import {TextChannel} from "./Channel";
+import {IUser} from "./User";
 
 export type Snowflake = string;
 

@@ -1,4 +1,4 @@
-import Client from "../client";
+import Client from "../Client";
 import axios, {AxiosResponse} from "axios";
 import HttpClient, {Gateway, ApiEndpoints} from "../http/http";
 import {Snowflake, Message, IMessage} from "../structures/message";

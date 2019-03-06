@@ -1,5 +1,5 @@
-import {Snowflake} from "./message";
-import Client from "../client";
+import {Snowflake} from "./Message";
+import Client from "../Client";
 
 export type Hash = string;
 

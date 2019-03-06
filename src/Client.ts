@@ -1,4 +1,4 @@
-import ClientManager, {IClientManager} from "./client-manager";
+import ClientManager, {IClientManager} from "./ClientManager";
 import {EventEmitter} from "events";
 import {Collection} from "./utils/collection";
 import {Snowflake, IMessage} from "./structures/message";

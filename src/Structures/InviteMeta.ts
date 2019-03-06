@@ -1,6 +1,6 @@
-import User from "./user";
-import {Snowflake} from "./message";
-import Client from "../client";
+import User from "./User";
+import {Snowflake} from "./Message";
+import Client from "../Client";
 
 export interface IInviteMetadata {
     readonly inviter: User;

@@ -1,6 +1,6 @@
-import {Snowflake} from "./message";
-import {Hash} from "./guild";
-import Client from "../client";
+import {Snowflake} from "./Message";
+import {Hash} from "./Guild";
+import Client from "../Client";
 
 export enum UserFlag {
     None = 0,
