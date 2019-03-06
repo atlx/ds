@@ -5,6 +5,7 @@ import ClientManager, {GatewayBotInformation} from "../ClientManager";
 import Client, {PresenceStatus} from "../Client";
 import {ClientEvent} from "./ClientEvents";
 import {IMessage} from "../Structures/Message";
+import Report from "../Utils/Report";
 
 export interface IGatewayHandler {
     on(opCode: number | string, handler: any): this;
@@ -39,13 +40,13 @@ export default class GatewayHandler implements IGatewayHandler {
     public hello(data: G_Hello): this {
         const gatewayBotInfo: GatewayBotInformation | null = this.manager.getGatewayBotInfo();
 
-        // TODO: Organize/optimize
+        // TODO: Organize/optimize.
         if (gatewayBotInfo === null) {
             throw new Error("Gateway bot information is null");
         }
 
-        // TODO: Debugging
-        console.log(`WS Handling hello message with data`, data);
+        // TODO: Debugging.
+        Report.verbose(`WS Handling hello message with data`, data);
 
         const message: G_Hello = data;
 

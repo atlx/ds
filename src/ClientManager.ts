@@ -7,6 +7,7 @@ import OpCode from "./Gateway/OpCode";
 import axios, {AxiosResponse} from "axios";
 import {ApiEndpoints} from "./Http/Http";
 import ClientActions, {IClientActions} from "./Gateway/ClientActions";
+import Report from "./Utils/Report";
 
 export type GatewayBotInformationSessionStartLimit = {
     readonly total: number;
@@ -56,7 +57,7 @@ export default class ClientManager extends EventEmitter {
         });
 
         if (response.status !== 200) {
-            throw new Error(`[ClientManager.fetchGatewayBot] Unable to fetch gateway bot information (${response.status})`);
+            throw new Error(`Unable to fetch gateway bot information (${response.status})`);
         }
 
         this.gatewayBotInfo = response.data;
@@ -66,24 +67,23 @@ export default class ClientManager extends EventEmitter {
 
     public async connectToWebSocket(): Promise<this> {
         if (this.gatewayBotInfo === null) {
-            throw new Error("[ClientManager.connectToWebSocket] Connection URL has not been initialized");
+            throw new Error("Connection URL has not been initialized");
         }
 
         this.socket = new WebSocket(`${this.gatewayBotInfo.url}/?v=6&encoding=json`);
 
         this.socket.onmessage = (e) => {
             if (!e.data.toString().trim().startsWith("{")) {
-                console.log(`WS Received Raw Data (${e.data.toString().length})`);
+                Report.verbose(`WS Received Raw Data (${e.data.toString().length})`);
 
                 return;
             }
 
             const payload: GatewayMessage = JSON.parse(e.data.toString());
 
-            // console.log(`WS Received (${payload.op})`, e.data.toString());
+            // Report.verbose(`WS Received (${payload.op})`, e.data.toString());
 
             let event: string = payload.op.toString();
-
 
             if (payload.op === 0) {
                 event = payload.t as string;
@@ -93,7 +93,7 @@ export default class ClientManager extends EventEmitter {
         };
 
         this.socket.onclose = (e) => {
-            console.log(`WS Connection closed (${e.code})`);
+            Report.verbose(`WS Connection closed (${e.code})`);
         };
 
         return this;
@@ -105,10 +105,10 @@ export default class ClientManager extends EventEmitter {
 
     public async send(opCode: OpCode, data: any): Promise<this> {
         if (this.socket === null) {
-            throw new Error("[ClientManager.send] Socket has not been initialized");
+            throw new Error("Socket has not been initialized");
         }
 
-        console.log(`WS Sending (${opCode}) `, data);
+        Report.verbose(`WS Sending (${opCode}) `, data);
 
         this.socket.send(JSON.stringify(generateMessage(opCode, data)));
 
