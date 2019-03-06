@@ -1,9 +1,9 @@
 import ClientManager, {IClientManager} from "./ClientManager";
 import {EventEmitter} from "events";
-import {Collection} from "./utils/collection";
-import {Snowflake, IMessage} from "./structures/message";
-import {IGenericChannel} from "./structures/channel";
-import User from "./structures/user";
+import {Collection} from "./Utils/Collection";
+import {Snowflake, IMessage} from "./Structures/Message";
+import {IGenericChannel} from "./Structures/Channel";
+import User from "./Structures/User";
 
 export interface IClient extends EventEmitter {
     connect(): Promise<this>;
