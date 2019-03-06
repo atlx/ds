@@ -2,7 +2,7 @@ import Client from "./Client";
 import {ClientEvent} from "./Gateway/ClientEvents";
 import {IMessage, Message} from "./Structures/Message";
 
-// TODO: This is just for testing; not an actual bot
+// TODO: This is just for testing; not an actual bot.
 if (!process.env.TOKEN) {
     throw new Error("Token is not set");
 }
@@ -14,7 +14,7 @@ client.on(ClientEvent.MessageCreate, async (message: IMessage) => {
         const msg: Message | null = await client.manager.actions.createMessage("Pong!", message.channel_id);
 
         if (msg) {
-            msg.channel.send("hello pong world!");
+            msg.channel.send(`I just said: ${msg.content}`);
         }
     }
 });
